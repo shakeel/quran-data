@@ -1,11 +1,15 @@
 import sys
 import glob
-from os import path
+import os
 from jinja2 import Template
 
 htmlTemplate = Template("""<html>
   <head>
     <meta charset="utf-8"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri+Quran&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri+Quran&family=Amiri">
     <title>{{name}}</title>
     <style>
     body {
@@ -15,7 +19,7 @@ htmlTemplate = Template("""<html>
       -moz-text-align-last: center;
       width: 18em;
       margin: auto;
-      font-family: Amiri Quran Colored;
+      font-family: 'Amiri Quran', serif;
       font-size: 16pt;
     }
     .basmala {
@@ -23,7 +27,7 @@ htmlTemplate = Template("""<html>
       text-align: center;
     }
     .sura-name {
-      font-family: Reem Kufi;
+      font-family: 'Reem Kufi';
       font-size: 24pt;
       font-feature-settings: "cv01";
       text-align: center;
@@ -44,15 +48,15 @@ htmlTemplate = Template("""<html>
 </html>
 """)
 
-def BuildPage(textfile, metadata):
+def build_page(textfile, metadata):
     text = textfile.read().strip()
-    num = int(path.splitext(path.basename(textfile.name))[0])
+    num = int(os.path.splitext(os.path.basename(textfile.name))[0])
     name, place, basmala = metadata[num]
     html = htmlTemplate.render(text=text, name=name, place=place, basmala=basmala)
 
     return html
 
-def ReadMetadata(filename):
+def read_metadata(filename):
     metadata = {}
     with open(filename) as metafile:
         lines = [l.strip().split("\t") for l in metafile.readlines()]
@@ -65,11 +69,11 @@ def ReadMetadata(filename):
 
 def main():
     dirname = sys.argv[1]
-    filenames = glob.glob(dirname + "/???.txt")
-    metadata = ReadMetadata(dirname + "/meta.txt")
+    filenames = glob.glob(os.path.join(dirname,"???.txt"))
+    metadata = read_metadata(os.path.join(dirname, "meta.txt"))
     for filename in filenames:
         with open(filename, "r") as textfile:
-            html = BuildPage(textfile, metadata)
+            html = build_page(textfile, metadata)
             with open(filename.replace(".txt", ".html"), "w") as htmlfile:
                 htmlfile.write(html)
 
