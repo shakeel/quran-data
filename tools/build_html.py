@@ -10,7 +10,7 @@ htmlTemplate = Template("""<!DOCTYPE html>
     <meta name="viewport" content="width=device-width">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri+Quran&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Reem+Kufi&display=swap">
     <title>{{name}}</title>
     <style>
@@ -21,7 +21,7 @@ htmlTemplate = Template("""<!DOCTYPE html>
       padding: 0 10px;
     }
     .basmala {
-      font-family: 'Amiri Quran', serif;
+      font-family: 'Amiri', serif;
       font-size: x-large;
       text-align: center;
     }
@@ -31,7 +31,7 @@ htmlTemplate = Template("""<!DOCTYPE html>
       text-align: center;
     }
     .sura {
-      font-family: 'Amiri Quran', serif;
+      font-family: 'Amiri', serif;
       font-size: xx-large;
     }
     </style>
